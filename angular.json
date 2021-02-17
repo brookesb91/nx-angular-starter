@@ -105,9 +105,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/demo"
-          ],
+          "outputs": ["coverage/apps/demo"],
           "options": {
             "jestConfig": "apps/demo/jest.config.js",
             "passWithNoTests": true
@@ -136,9 +134,44 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
+            "lintFilePatterns": ["apps/demo-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "ngrx-auth": {
+      "projectType": "library",
+      "root": "libs/ngrx-auth",
+      "sourceRoot": "libs/ngrx-auth/src",
+      "prefix": "ngrx",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "options": {
+            "tsConfig": "libs/ngrx-auth/tsconfig.lib.json",
+            "project": "libs/ngrx-auth/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/ngrx-auth/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
             "lintFilePatterns": [
-              "apps/demo-e2e/**/*.{js,ts}"
+              "libs/ngrx-auth/src/**/*.ts",
+              "libs/ngrx-auth/src/**/*.html"
             ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ngrx-auth"],
+          "options": {
+            "jestConfig": "libs/ngrx-auth/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }
